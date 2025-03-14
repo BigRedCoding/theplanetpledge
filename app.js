@@ -39,12 +39,6 @@ app.use(cors(corsOptions));
 
 app.use(requestLogger);
 
-app.get("/crash-test", () => {
-  setTimeout(() => {
-    throw new HttpError.ServerError("An error has occurred on the server");
-  }, 0);
-});
-
 mongoose.connect("mongodb://127.0.0.1:27017/wtwr_db").catch(() => {
   throw new HttpError.ServerError("An error has occurred on the server");
 });
