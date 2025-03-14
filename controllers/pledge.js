@@ -21,7 +21,7 @@ const createPledge = (req, res, next) => {
 
 const getPledges = (req, res, next) => {
   Pledge.find()
-    .then((items) => res.status(200).send(items))
+    .then((items) => res.status(200).send({ data: items }))
     .catch(() => next(HttpError.ServerError()));
 };
 

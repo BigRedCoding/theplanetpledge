@@ -32,14 +32,17 @@ const corsOptions = {
     }
   },
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  credentials: true,
+  // credentials: true,
 };
 
-app.use(cors(corsOptions));
+const corsPolicy =
+  process.env.NODE_ENV === "production" ? cors(corsOptions) : cors();
+
+app.use(corsPolicy);
 
 app.use(requestLogger);
 
-mongoose.connect("mongodb://127.0.0.1:27017/wtwr_db").catch(() => {
+mongoose.connect("mongodb://127.0.0.1:27017/theplanetpledge").catch(() => {
   throw new HttpError.ServerError("An error has occurred on the server");
 });
 
