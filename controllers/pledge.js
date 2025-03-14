@@ -1,4 +1,4 @@
-const Pledge = require("../models/Pledge.js");
+const Pledge = require("../models/pledge.js");
 
 const HttpError = require("../utils/errors");
 
