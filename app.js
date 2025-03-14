@@ -23,8 +23,8 @@ const mainRouter = require("./routes/index");
 const corsOptions = {
   origin(origin, callback) {
     if (
-      origin === "https://www.bdwtwr.justlearning.net" ||
-      origin === "https://api.bdwtwr.justlearning.net"
+      origin === "https://www.theplanetpledge.justlearning.net" ||
+      origin === "https://api.theplanetpledge.justlearning.net"
     ) {
       callback(null, true);
     } else {
