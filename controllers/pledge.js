@@ -25,7 +25,18 @@ const getPledges = (req, res, next) => {
     .catch(() => next(HttpError.ServerError()));
 };
 
+const deletePledges = (req, res, next) => {
+  Pledge.deleteMany()
+    .then(() => {
+      res.status(200).send({ message: "All pledges deleted successfully" });
+    })
+    .catch(() => {
+      next(HttpError.ServerError());
+    });
+};
+
 module.exports = {
   createPledge,
   getPledges,
+  deletePledges,
 };
