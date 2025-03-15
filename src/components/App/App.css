@@ -1,0 +1,30 @@
+.page {
+  background-color: #e0f1f6;
+  min-height: 100vh;
+  font-family: "FunnelSans", Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  color: #212121;
+  max-width: 1280px;
+}
+
+.page__content {
+  margin: 0;
+  padding: 0;
+}
+
+.page__section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.delete-pledges {
+  visibility: hidden;
+  position: relative;
+  width: 60px;
+  height: 20px;
+}
+
+button:hover {
+  cursor: pointer;
+}

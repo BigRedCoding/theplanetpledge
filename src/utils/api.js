@@ -3,43 +3,59 @@ const baseUrl =
     ? "https://api.theplanetpledge.justlearning.net"
     : "http://localhost:3001";
 
+console.log(baseUrl);
+
 export function responseCheck(res) {
   if (res.ok) {
     return res.json();
   }
   return res.json().then((error) => {
-    return Promise.reject(`Error: ${error.message}`);
+    return Promise.reject(`Error: ${error.message || "Unknown error"}`);
   });
 }
 
 export async function getAllPledges() {
-  return fetch(`${baseUrl}/pledges`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  })
-    .then((res) => responseCheck(res))
-    .then((res) => {
-      return res;
-    })
-    .catch((error) => {
-      console.error(error);
+  try {
+    const res = await fetch(`${baseUrl}/pledges`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
     });
+
+    return responseCheck(res);
+  } catch (error) {
+    console.error("Error fetching pledges:", error);
+  }
 }
 
 export async function addPledge(pledge) {
-  return fetch(`${baseUrl}/pledges`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      description: pledge,
-    }),
-  })
-    .then((res) => responseCheck(res))
-    .then((res) => res.data)
-    .catch((error) => {
-      console.error(error);
-      return Promise.reject(`Error: ${error.message}`);
+  try {
+    const res = await fetch(`${baseUrl}/pledges`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        description: pledge,
+      }),
     });
+
+    const data = await responseCheck(res);
+    return data;
+  } catch (error) {
+    console.error("Error adding pledge:", error);
+    return Promise.reject(`Error: ${error.message || "Unknown error"}`);
+  }
+}
+
+export async function deletePledges() {
+  try {
+    const res = await fetch(`${baseUrl}/pledges`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    return responseCheck(res);
+  } catch (error) {
+    console.error("Error fetching pledges:", error);
+  }
 }

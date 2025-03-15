@@ -1,0 +1,164 @@
+.pledge-modal {
+  z-index: 5;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0000004d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pledge-modal__container {
+  z-index: 6;
+  background-color: white;
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 16px;
+}
+
+.pledge-modal__close-button {
+  z-index: 7;
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  width: 40px;
+  height: 40px;
+  background-image: url("../../assets/icons/close.svg");
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+}
+
+.pledge-modal__text-container {
+  padding: 43px 79px 11px 36px;
+  width: 315px;
+  height: 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.pledge-modal__text {
+  font-size: 24px;
+  line-height: 28.13px;
+  font-weight: 900;
+}
+
+.pledge-modal__submit-button {
+  color: #2f71e5;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  line-height: 21.78px;
+  width: fit-content;
+  padding: 0;
+  margin: 0;
+}
+
+.modal_opened {
+  visibility: visible;
+  opacity: 1;
+}
+.modal__container {
+  padding: 32px 50px;
+  margin: 0;
+  background-color: #ffffff;
+  width: 630px;
+  border-radius: 8px;
+}
+
+.modal__title {
+  font-size: 50px;
+  font-family: "ReenieBeanie", Arial, Helvetica, sans-serif;
+  line-height: 20px;
+  font-weight: bold;
+  padding-top: 12px;
+  padding-bottom: 35px;
+  color: #3a426d;
+  margin: 0;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.modal__label {
+  padding: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 17.6px;
+  color: rgba(33, 33, 33, 0.7);
+  margin: 0;
+}
+
+#pledge-input {
+  height: 100px;
+}
+.modal__input {
+  max-width: 630px;
+  padding: 16px 12px;
+  border-radius: 8px;
+  border-width: 1px;
+  border-color: rgba(33, 33, 33, 0.4);
+  margin: 0;
+}
+
+.modal__submit-button {
+  width: 200px;
+  border-radius: 18px;
+  border: 3px;
+  padding: 18px;
+  background-color: #84bc78;
+  line-height: 20px;
+  color: rgba(252, 245, 229, 1);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.modal__label_email-permission {
+  border: none;
+  padding-bottom: 8px;
+}
+
+#modal__email-permissions {
+  display: flex;
+  column-gap: 50px;
+  padding-left: 40px;
+}
+
+.modal__email-permission-choice {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 5px;
+}
+
+#email-input {
+  max-width: 250px;
+  height: 100%;
+  padding: 16px 12px;
+  border-radius: 8px;
+  border-width: 1px;
+  border-color: rgba(33, 33, 33, 0.4);
+  margin: 0;
+}
+
+.modal__form_email-input {
+  display: none;
+}
+
+.email_mod {
+  display: block;
+}
+
+.modal_opened {
+  visibility: visible;
+}

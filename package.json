@@ -1,9 +1,9 @@
 {
-  "name": "News_Explorer",
+  "name": "The Planet Pledge",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://newsexplorer.justlearning.net/",
+  "homepage": "https://theplanetpledge.justlearning.net",
   "scripts": {
     "dev": "vite --open",
     "build": "vite build",
