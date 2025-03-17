@@ -22,7 +22,7 @@
 
 ### Both the frontend and backend files can be accessed here (https://github.com/BigRedCoding/theplanetpledge). These can be downloaded and ran locally. When you're in VS Code, using "npm install" for dependecies and "npm run dev" on both should allow local use.
 
-### Group design input is posted here (https://github.com/hmperry/code_jam_march_2025)
+### Group design input is posted here (https://github.com/hmperry/code_jam_march_2025).
 
 ================================================================================================
 
