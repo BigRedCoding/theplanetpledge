@@ -28,6 +28,6 @@
 
 ### **`Video Demonstration:`**
 
-### This will be left blank until we post a demonstration video!
+### Access Brandon Dooley's demonstration video here! (https://youtu.be/oX8sU3LYGLg)
 
 ================================================================================================
