@@ -8,11 +8,34 @@ export default function PledgeModal({
 }) {
   const [visible, setVisible] = useState("");
   const [pledgeText, setPledgeText] = useState("");
+  const [email, setEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addAPledge(pledgeText);
+
+    if (pledgeText.trim() === "") {
+      setErrorMessage("Please fill out all answers");
+      return;
+    }
+
+    const contactChoice = document.querySelector(
+      'input[name="contact"]:checked'
+    );
+    if (!contactChoice) {
+      setErrorMessage("Please fill out all answers");
+      return;
+    }
+
+    if (contactChoice.value === "yes" && email.trim() === "") {
+      setErrorMessage("Please fill out all answers");
+      return;
+    }
+
+    addAPledge(pledgeText, email);
     setPledgeText("");
+    setEmail("");
+    setErrorMessage("");
   };
 
   const yesClick = () => {
@@ -38,8 +61,7 @@ export default function PledgeModal({
           <form name="" className="modal__form" id="" noValidate>
             <label htmlFor="pledge-input" className="modal__label">
               What will you do to make the earth better?
-              <input
-                type="text"
+              <textarea
                 className="modal__input"
                 id="pledge-input"
                 name="pledge"
@@ -48,6 +70,11 @@ export default function PledgeModal({
                 minLength="2"
                 maxLength="40"
                 onChange={(e) => setPledgeText(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                  }
+                }}
                 value={pledgeText}
               />
             </label>
@@ -55,11 +82,11 @@ export default function PledgeModal({
               <legend className="modal__label">
                 Would you like to be reminded periodically about your pledge?
               </legend>
-              <div id="modal__email-permissions">
+              <div className="modal__email-permissions">
                 <div className="modal__email-permission-choice">
                   <input
                     type="radio"
-                    className="modal__input"
+                    className="modal__radio-input"
                     id="email-yes"
                     name="contact"
                     value="yes"
@@ -72,7 +99,7 @@ export default function PledgeModal({
                 <div className="modal__email-permission-choice">
                   <input
                     type="radio"
-                    className="modal__input"
+                    className="modal__radio-input"
                     id="email-no"
                     name="contact"
                     value="no"
@@ -83,6 +110,7 @@ export default function PledgeModal({
                   </label>
                 </div>
               </div>
+
               <div className={`modal__form_email-input ${visible}`}>
                 <label
                   htmlFor="email-input"
@@ -90,19 +118,29 @@ export default function PledgeModal({
                   id="email-input-label"
                 >
                   Email Address
-                  <input
+                  <textarea
                     type="email"
                     className="modal__input"
                     id="email-input"
                     name="email"
-                    placeholder=""
-                    required
+                    placeholder="Enter email here"
+                    required={visible === "email_mod"}
                     minLength="2"
-                    maxLength="40"
+                    onChange={(e) => setEmail(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                      }
+                    }}
+                    value={email}
                   />
                 </label>
               </div>
             </fieldset>
+            {errorMessage && (
+              <span className="error-message">*** {errorMessage}</span>
+            )}
+
             <button
               type="submit"
               className="modal__submit-button"

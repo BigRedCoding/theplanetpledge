@@ -1,10 +1,12 @@
-//Styles
+import React from "react";
+
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer.jsx";
 
 import PledgeModal from "../PledgeModal/PledgeModal.jsx";
+import QuizResultsModal from "../QuizResultsModal/QuizResultsModal.jsx";
 
 import { getAllPledges, addPledge, deletePledges } from "../../utils/api.js";
 import { useEffect, useState } from "react";
@@ -12,6 +14,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [pledges, setPledges] = useState([]);
   const [activeModal, setActiveModal] = useState("");
+  const [userResult, setUserResult] = useState(0);
 
   const closeActiveModal = () => {
     setActiveModal("");
@@ -54,7 +57,11 @@ function App() {
     <div className="page">
       <div className="page__content">
         <Header setOpenModal={setOpenModal} />
-        <Main pledges={pledges} addAPledge={addAPledge} />
+        <Main
+          pledges={pledges}
+          setOpenModal={setOpenModal}
+          setUserResult={setUserResult}
+        />
         <Footer />
       </div>
       <PledgeModal
@@ -62,6 +69,13 @@ function App() {
         addAPledge={addAPledge}
         closeActiveModal={closeActiveModal}
       />
+
+      <QuizResultsModal
+        userScoreNum={userResult}
+        isOpened={activeModal === "results-modal" && "modal_opened"}
+        closeActiveModal={closeActiveModal}
+      />
+
       <button className="delete-pledges" onClick={handleDeletePledges}></button>
     </div>
   );

@@ -1,331 +1,127 @@
-import "./QuizSection.css";
+import React, { useState } from "react";
 
-export default function QuizSection() {
+import "./QuizSection.css";
+import { questions } from "../../utils/constants";
+
+export default function QuizSection({ setOpenModal, setUserResult }) {
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const calculateScore = (questionId, value) => {
+    let score = 0;
+    if (questionId === "shower-minutes") {
+      if (value < 10) score = 10;
+      else if (value >= 11 && value <= 20) score = 5;
+      else if (value > 20) score = 0;
+    } else if (questionId === "dishwasher-cycles") {
+      if (value < 3) score = 10;
+      else if (value >= 4 && value <= 6) score = 5;
+      else if (value > 6) score = 0;
+    } else if (questionId === "lawn-watering") {
+      if (value < 2) score = 10;
+      else if (value >= 3 && value <= 4) score = 5;
+      else if (value > 4) score = 0;
+    }
+    return score;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let totalScore = 0;
+    let allAnswered = true;
+
+    questions.forEach((question) => {
+      const { id, type, options } = question;
+      if (type === "number") {
+        const inputValue = document.getElementById(id)?.value;
+        if (!inputValue) {
+          allAnswered = false;
+        } else {
+          totalScore += calculateScore(id, parseInt(inputValue));
+        }
+      } else if (type === "radio") {
+        const selectedOption = options.find(
+          (option) =>
+            document.querySelector(`input[name=${id}]:checked`)?.value ===
+            option.toLowerCase()
+        );
+        if (!selectedOption) {
+          allAnswered = false;
+        } else {
+          if (selectedOption === "Yes") totalScore += 10;
+          else if (selectedOption === "Sometimes") totalScore += 5;
+          else if (selectedOption === "No") totalScore += 0;
+        }
+      }
+    });
+
+    if (allAnswered) {
+      setUserResult(totalScore);
+      setOpenModal("results-modal");
+      setErrorMessage("");
+    } else {
+      setErrorMessage("Please fill out all answers");
+    }
+  };
+
   return (
     <div className="quiz-section">
       <section className="quiz page__section">
         <h2 className="quiz__title" id="quiz">
           Energy Saver Quiz
         </h2>
-        <form action="" className="quiz__Questions">
-          <div className="quiz__Question">
-            <label htmlFor="shower-minutes" className="quiz__Question_Desc">
-              How many minutes do you typically spend in the shower?
-              <input
-                type="number"
-                id="shower-minutes"
-                className="quiz__Question_number_Answer"
-                placeholder="enter minutes here"
-              />
-            </label>
-          </div>
-          <div className="quiz__Question">
-            <p className="quiz__Question_Desc">
-              Do you turn off the water while you brush your teeth?
-            </p>
-            <div className="quiz__Checkboxes">
-              <label
-                htmlFor="brush-teeth-yes"
-                className="quiz__Question_choice"
-              >
-                Yes
-                <input
-                  name="brush-teeth"
-                  type="radio"
-                  id="brush-teeth-yes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label
-                htmlFor="brush-teeth-sometimes"
-                className="quiz__Question_choice"
-              >
-                Sometimes
-                <input
-                  name="brush-teeth"
-                  type="radio"
-                  id="brush-teeth-sometimes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label htmlFor="brush-teeth-no" className="quiz__Question_choice">
-                No
-                <input
-                  name="brush-teeth"
-                  type="radio"
-                  id="brush-teeth-no"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
+        <form onSubmit={handleSubmit} className="quiz__Questions">
+          {questions.map((question, index) => (
+            <div className="quiz__Question" key={index}>
+              {question.type === "number" ? (
+                <>
+                  <label htmlFor={question.id} className="quiz__Question_Desc">
+                    {index + 1}. {question.label}
+                    <input
+                      type={question.type}
+                      id={question.id}
+                      className="quiz__Question_number_Answer"
+                      placeholder={question.placeholder}
+                      min={question.min}
+                      max={question.max}
+                      step={question.step}
+                    />
+                  </label>
+                </>
+              ) : (
+                <>
+                  <p className="quiz__Question_Desc">
+                    {index + 1}. {question.label}
+                  </p>
+                  <div className="quiz__Checkboxes">
+                    {question.options.map((option, idx) => (
+                      <label
+                        htmlFor={`${question.id}-${option.toLowerCase()}`}
+                        className="quiz__Question_choice"
+                        key={idx}
+                      >
+                        {option}
+                        <input
+                          name={question.id}
+                          type={question.type}
+                          id={`${question.id}-${option.toLowerCase()}`}
+                          className="quiz__Question_choice_Answer"
+                          value={option.toLowerCase()}
+                        />
+                      </label>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
-          </div>
-          <div className="quiz__Question">
-            <p className="quiz__Question_Desc">
-              When washing dishes by hand, do you leave the water running?
-            </p>
-            <div className="quiz__Checkboxes">
-              <label
-                htmlFor="hand-wash-dish-yes"
-                className="quiz__Question_choice"
-              >
-                Yes
-                <input
-                  name="hand-wash"
-                  type="radio"
-                  id="hand-wash-dish-yes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label
-                htmlFor="hand-wash-dish-sometimes"
-                className="quiz__Question_choice"
-              >
-                Sometimes
-                <input
-                  name="hand-wash"
-                  type="radio"
-                  id="hand-wash-dish-sometimes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label
-                htmlFor="hand-wash-dish-no"
-                className="quiz__Question_choice"
-              >
-                No
-                <input
-                  name="hand-wash"
-                  type="radio"
-                  id="hand-wash-dish-no"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-            </div>
-          </div>
-          <div className="quiz__Question">
-            <label htmlFor="dishwasher-cycles" className="quiz__Question_Desc">
-              How many times do you run the dishwasher per week?
-              <input
-                type="number"
-                id="dishwasher-cycles"
-                className="quiz__Question_number_Answer"
-                placeholder="enter count here"
-              />
-            </label>
-          </div>
-          <div className="quiz__Question">
-            <label htmlFor="lawn-watering" className="quiz__Question_Desc">
-              How often do you water your lawn or garden?
-              <input
-                type="number"
-                id="lawn-watering"
-                className="quiz__Question_number_Answer"
-                placeholder="enter minutes here"
-              />
-            </label>
-          </div>
-          <div className="quiz__Question">
-            <p className="quiz__Question_Desc">
-              Do you turn off the lights when you leave a room?
-            </p>
-            <div className="quiz__Checkboxes">
-              <label htmlFor="lights-off-yes" className="quiz__Question_choice">
-                Yes
-                <input
-                  name="lights-off"
-                  type="radio"
-                  id="lights-off-yes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label
-                htmlFor="lights-off-sometimes"
-                className="quiz__Question_choice"
-              >
-                Sometimes
-                <input
-                  name="lights-off"
-                  type="radio"
-                  id="lights-off-sometimes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label htmlFor="lights-off-no" className="quiz__Question_choice">
-                No
-                <input
-                  name="lights-off"
-                  type="radio"
-                  id="lights-off-no"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-            </div>
-          </div>
-          <div className="quiz__Question">
-            <p className="quiz__Question_Desc">
-              Do you unplug electronics when they are not in use?
-            </p>
-            <div className="quiz__Checkboxes">
-              <label
-                htmlFor="unplug-electronics-yes"
-                className="quiz__Question_choice"
-              >
-                Yes
-                <input
-                  name="unplug-electronics"
-                  type="radio"
-                  id="unplug-electronics-yes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label
-                htmlFor="unplug-electronics-sometimes"
-                className="quiz__Question_choice"
-              >
-                Sometimes
-                <input
-                  name="unplug-electronics"
-                  type="radio"
-                  id="unplug-electronics-sometimes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label
-                htmlFor="unplug-electronics-no"
-                className="quiz__Question_choice"
-              >
-                No
-                <input
-                  name="unplug-electronics"
-                  type="radio"
-                  id="unplug-electronics-no"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-            </div>
-          </div>
-          <div className="quiz__Question">
-            <p className="quiz__Question_Desc">
-              Do you use a ceiling fan instead of air conditioning when
-              possible?
-            </p>
-            <div className="quiz__Checkboxes">
-              <label
-                htmlFor="ceiling-fan-yes"
-                className="quiz__Question_choice"
-              >
-                Yes
-                <input
-                  name="ceiling-fan"
-                  type="radio"
-                  id="ceiling-fan-yes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label
-                htmlFor="ceiling-fan-sometimes"
-                className="quiz__Question_choice"
-              >
-                Sometimes
-                <input
-                  name="ceiling-fan"
-                  type="radio"
-                  id="ceiling-fan-sometimes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label htmlFor="ceiling-fan-no" className="quiz__Question_choice">
-                No
-                <input
-                  name="ceiling-fan"
-                  type="radio"
-                  id="ceiling-fan-no"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-            </div>
-          </div>
-          <div className="quiz__Question">
-            <p className="quiz__Question_Desc">
-              Do you charge your phone overnight?
-            </p>
-            <div className="quiz__Checkboxes">
-              <label
-                htmlFor="charge-phone-yes"
-                className="quiz__Question_choice"
-              >
-                Yes
-                <input
-                  name="charge-phone"
-                  type="radio"
-                  id="charge-phone-yes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label
-                htmlFor="charge-phone-sometimes"
-                className="quiz__Question_choice"
-              >
-                Sometimes
-                <input
-                  name="charge-phone"
-                  type="radio"
-                  id="charge-phone-sometimes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label
-                htmlFor="charge-phone-no"
-                className="quiz__Question_choice"
-              >
-                No
-                <input
-                  name="charge-phone"
-                  type="radio"
-                  id="charge-phone-no"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-            </div>
-          </div>
-          <div className="quiz__Question">
-            <p className="quiz__Question_Desc">
-              Do you use a programmable thermostat to manage heating and
-              cooling?
-            </p>
-            <div className="quiz__Checkboxes">
-              <label htmlFor="thermostat-yes" className="quiz__Question_choice">
-                Yes
-                <input
-                  name="thermostat"
-                  type="radio"
-                  id="thermostat-yes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label
-                htmlFor="thermostat-sometimes"
-                className="quiz__Question_choice"
-              >
-                Sometimes
-                <input
-                  name="thermostat"
-                  type="radio"
-                  id="thermostat-sometimes"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-              <label htmlFor="thermostat-no" className="quiz__Question_choice">
-                No
-                <input
-                  name="thermostat"
-                  type="radio"
-                  id="thermostat-no"
-                  className="quiz__Question_choice_Answer"
-                />
-              </label>
-            </div>
-          </div>
+          ))}
+          {errorMessage && (
+            <span className="error-message">*** {errorMessage}</span>
+          )}
+
+          <button type="submit" className="quiz__Submission">
+            See your results
+          </button>
         </form>
       </section>
     </div>

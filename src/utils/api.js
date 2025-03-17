@@ -3,8 +3,6 @@ const baseUrl =
     ? "https://api.theplanetpledge.justlearning.net"
     : "http://localhost:3001";
 
-console.log(baseUrl);
-
 export function responseCheck(res) {
   if (res.ok) {
     return res.json();

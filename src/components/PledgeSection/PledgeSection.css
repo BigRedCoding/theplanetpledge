@@ -2,7 +2,7 @@
   font-family: "ReenieBeanie", Arial, Helvetica, sans-serif;
   font-size: 50px;
   font-weight: bold;
-  line-height: 20px;
+  line-height: 54px;
   color: #3a426d;
 }
 .pledge__wordCloud {
@@ -19,7 +19,8 @@
 
 @media screen and (max-width: 425px) {
   .pledge__caption {
-    font-size: 20px;
+    font-size: 28px;
+    line-height: 32px;
   }
   .pledge__word {
     text-align: center;

@@ -28,6 +28,7 @@
 
 .header__logo {
   max-width: 400px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .header {
@@ -94,6 +95,21 @@
 .nav__image {
   width: 40px;
   padding-bottom: 8px;
+}
+
+.nav__link:hover {
+  text-decoration: underline;
+  font-size: 22px;
+}
+
+.nav-button__pledge:hover {
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 1), -1px -1px 0px rgba(0, 0, 0, 1),
+    1px -1px 0px rgba(0, 0, 0, 1), -1px 1px 0px rgba(0, 0, 0, 1);
+  border: 2px black solid;
+}
+
+.header__logo:hover {
+  transform: scale(1.2);
 }
 
 @media screen and (max-width: 462px) {

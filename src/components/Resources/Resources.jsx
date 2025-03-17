@@ -20,13 +20,15 @@ export default function Resources() {
             <div className="resources__content">
               <h3 className="resources__title">Energy Star</h3>
               <p className="resources__description">
-                Check the
+                Check the{" "}
                 <a
                   className="resources__link"
                   href="https://www.energystar.gov/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Energy Star
-                </a>
+                </a>{" "}
                 rating of any appliances you buy and go for highest rating you
                 can afford.
               </p>
@@ -41,13 +43,15 @@ export default function Resources() {
             <div className="resources__content">
               <h3 className="resources__title">Walk Score</h3>
               <p className="resources__description">
-                Before you buy or rent a home or apartment, use an app like
+                Before you buy or rent a home or apartment, use an app like{" "}
                 <a
                   className="resources__link"
                   href="https://www.walkscore.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Walk Score
-                </a>
+                </a>{" "}
                 to determine the walkability of your potential neighborhood.
               </p>
             </div>
@@ -61,13 +65,15 @@ export default function Resources() {
             <div className="resources__content">
               <h3 className="resources__title">Efficiency Inspection</h3>
               <p className="resources__description">
-                Insulate your home.
+                Insulate your home.{" "}
                 <a
                   className="resources__link"
                   href="https://www.nvenergy.com/save-with-powershift/energy-assessment/energy-assessment"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Get a free efficiency inspection from NV Energy
-                </a>
+                </a>{" "}
                 . Start your insulation in the attic and the roof. Install
                 double or triple-paned, argon-filled windows. Do it super-duper:
                 insulate your walls.
@@ -86,11 +92,14 @@ export default function Resources() {
               </h3>
               <p className="resources__description">
                 Stop using Roundup and other chemical weed killers. One of
-                Rounup's ingredients,
+                Rounup's ingredients,{" "}
                 <a
                   className="resources__link"
                   href="https://www.honeysolutions.com/roundup-what-impact-does-this-herbicide-have-on-bees-and-food/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
+                  {" "}
                   kills bees and other pollinators
                 </a>
                 .

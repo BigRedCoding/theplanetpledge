@@ -88,7 +88,9 @@ export default function PledgeSection({ pledges }) {
   return (
     <div className="pledge-section">
       <section className="pledge page__section">
-        <h2 className="pledge__caption">Pledge Wall</h2>
+        <h2 className="pledge__caption">
+          Join Others Pledging to Make a Difference
+        </h2>
         <div className="pledge__wordCloud">{pledgeList}</div>
       </section>
     </div>
