@@ -6,6 +6,8 @@
 
 ### Welcome! We are pleased to present our rendition of this project called "The Planet Pledge." This is a fun website that gives users the opportunity to view pledges made by others that can help the planet, post their own pledges they'd like to commit to (with a mock-input for submitting their email to help remind them of their pledge), take a quiz to check how planet-conscious their current actions are, and access other resources that revolve around assisting proactive proplanet actions!
 
+### Authors: Brandon Dooley, McKay Perry, Anand Ragothaman, Roman Ehrhardt
+
 ================================================================================================
 
 ### **`TECHNIQUES AND TECHNOLOGIES:`**
