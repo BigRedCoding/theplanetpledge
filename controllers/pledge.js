@@ -5,6 +5,10 @@ const HttpError = require("../utils/errors");
 const createPledge = (req, res, next) => {
   const { description } = req.body;
 
+  console.log(req.body.description);
+
+  console.log(description);
+
   Pledge.create({
     description,
   })
