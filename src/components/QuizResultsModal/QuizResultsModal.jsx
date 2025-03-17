@@ -16,21 +16,21 @@ export default function QuizResultsModal({
 
   useEffect(() => {
     if (userScoreNum >= 0 && userScoreNum <= 25) {
-      setUserResult(archetypes[0]);
+      setUserResult(archetypes[3]);
     }
 
     if (userScoreNum >= 26 && userScoreNum <= 50) {
-      setUserResult(archetypes[1]);
-    }
-
-    if (userScoreNum >= 51 && userScoreNum <= 75) {
       setUserResult(archetypes[2]);
     }
 
-    if (userScoreNum > 75) {
-      setUserResult(archetypes[3]);
+    if (userScoreNum >= 51 && userScoreNum <= 75) {
+      setUserResult(archetypes[1]);
     }
-  }, [userResult]);
+
+    if (userScoreNum > 75) {
+      setUserResult(archetypes[0]);
+    }
+  }, [userScoreNum]);
   return (
     <div className={`quiz-results ${isOpened}`}>
       <div className="quiz-results__modal" id="quiz-results-modal">
